@@ -26,5 +26,26 @@ app.get('/', (req, res) => {
 });
 
 
+// setup socket.io for communication
+io.on('connection', (socket) => {
+    // my self
+    socket.emit('me', socket.id);
+
+    // call hugup or disconnect
+    socket.on('disconnect', () =>{
+        socket.broadcast.emit("callended");
+    });
+
+    // call the user and sent all the data
+    socket.on("calluser", ({userTocall, signalData, from, name}) => {
+        io.to(userTocall).emit("calluser", {signal : signalData, from, name})
+    })
+
+    // answer the call
+    socket.on("answecall", (data) => {
+        io.to(data.to).emit("callaccepted", data.signal)
+    })
+})
+
 server.listen(PORT, () => console.log(`listening on port${PORT}`));
 
