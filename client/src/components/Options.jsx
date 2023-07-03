@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Options() {
+function Options({children}) {
   return (
-    <div>Options</div>
+    <div>{children}</div>
   )
 }
 
