@@ -10,9 +10,10 @@ function Options({children}) {
 
   return (
     <div>
-      <form action="">
-        <p>Account Info</p>
-      </form>
+      {/* form for copy in clipboard and attend call */}
+          <form action="">
+            <p>Account Info</p>
+          </form>
       <p>Options</p>
       {children}
     </div>
